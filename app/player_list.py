@@ -4,6 +4,15 @@ from app.player_node import PlayerNode
 class PlayerList:
     def __init__(self):
         self._head = None
+        self._tail = None
+
+    @property
+    def tail(self):
+        return self._tail
+
+    @tail.setter
+    def tail(self, node):
+        self._tail = node
 
     def is_empty(self):
         return self._head is None
