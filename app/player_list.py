@@ -21,9 +21,20 @@ class PlayerList:
         new_player = PlayerNode(player)
         if self.is_empty():
             self._head = new_player
+            self._tail = new_player
         else:
             new_player.next_player = self._head
             self._head.previous_player = new_player
             self._head = new_player
+        return new_player
 
-# self.assertEqual(ll._head.next_node.prev_node.player, player2)
+    def insert_tail_node(self, player):
+        new_player = PlayerNode(player)
+        if self.is_empty():
+            self._head = new_player
+            self._tail = new_player
+        else:
+            new_player.previous_player = self._tail
+            self._tail.next_player = new_player
+            self._tail = new_player
+        return new_player
