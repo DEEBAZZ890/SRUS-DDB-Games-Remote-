@@ -38,3 +38,39 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(test_insert_two.previous_player, test_insert_one)
         self.assertEqual(test_insert_two.next_player, test_insert_three)
         self.assertEqual(test_insert_three.previous_player, test_insert_two)
+
+    def test_delete_head_from_list(self):
+        # Empty list test
+        empty_test_list = PlayerList()
+        temp_empty_list = []
+        self.assertEqual(empty_test_list, temp_empty_list)
+        self.assertIsNone(empty_test_list.delete_head_node())
+
+    def test_single_item_delete_head_from_list(self):
+        test_list = PlayerList()
+        temp_player_head = Player(20069321, "Daniel")
+        test_list.insert_head_node(temp_player_head)
+        temp_empty_list = []
+        self.assertEqual(test_list.delete_head_node(), temp_player_head)
+        self.assertTrue(test_list._head is None)
+
+    def test_three_item_list_delete_head(self):
+        test_list = PlayerList()
+        first_head = Player(20069321, "Daniel")
+        second_head = Player(10472204, "John")
+        third_head = Player(29543305, "Brayden")
+        test_list.insert_head_node(first_head)
+        test_list.insert_head_node(second_head)
+        test_list.insert_head_node(third_head)
+        self.assertEqual(test_list.delete_head_node(), third_head)
+        self.assertEqual(test_list._head.player, second_head)
+
+    def test_two_items_list_delete_tail(self):
+        test_list = PlayerList()
+        first_tail = Player(20069321, "Daniel")
+        second_tail = Player(10472204, "John")
+        test_list.insert_tail_node(first_tail)
+        test_list.insert_tail_node(second_tail)
+        self.assertEqual(test_list.delete_tail_node(), second_tail)
+        self.assertEqual(test_list._tail.player, first_tail)
+

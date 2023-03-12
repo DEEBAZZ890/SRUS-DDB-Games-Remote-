@@ -28,6 +28,18 @@ class PlayerList:
             self._head = new_player
         return new_player
 
+    def delete_head_node(self):
+        if self.is_empty():
+            return None
+        else:
+            existing_head = self._head
+            self._head = existing_head.next_player
+            if self._head is None:
+                self._tail = None
+            else:
+                self._head.previous_player = None
+            return existing_head.player
+
     def insert_tail_node(self, player):
         new_player = PlayerNode(player)
         if self.is_empty():
@@ -38,3 +50,16 @@ class PlayerList:
             self._tail.next_player = new_player
             self._tail = new_player
         return new_player
+
+    def delete_tail_node(self):
+        if self._tail is None:
+            return None
+        else:
+            existing_tail = self._tail
+            self._tail = existing_tail.previous_player
+            if self._tail is None:
+                self._head = None
+            else:
+                self._tail.next_player = None
+            return existing_tail.player
+
