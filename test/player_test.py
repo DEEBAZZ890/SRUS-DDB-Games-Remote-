@@ -2,17 +2,12 @@ import unittest
 from app.player import Player
 
 
-class TestPlayerStringMethods(unittest.TestCase):
-    def setUp(self) -> None:
-        self.test_player = Player("20069321", "Daniel")
+class TestPlayerPrivateInstanceVariables(unittest.TestCase):
+    def test_uid(self):     # Checks that player id is added successfully
+        player = Player("20069321", "Daniel")
+        self.assertEqual(player._uid, "20069321")
 
-    def test_if_(self):
-        self.assertEqual(self.test_player, '', '')
-        return "Player test was not empty"
+    def test_name(self):       # Checks that player name is added successfully
+        player = Player("20069321", "Daniel")
+        self.assertEqual(player._name, "Daniel")
 
-    def test_if_uid_is_string(self):
-        print("nothing")
-
-
-if __name__ == '__main__':
-    unittest.main()
