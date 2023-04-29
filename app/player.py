@@ -46,6 +46,11 @@ def name(self):
     return self._name
 
 
+@name.setter
+def name(self, value):
+    self._name = value
+
+
 @property
 def score(self):
     return self._score
@@ -63,21 +68,21 @@ def __str__(self):  # used to print readable string of the player object
     return f"{self._uid} - {self._name}"
 
 
-def __lt__(self, other):        # Dunder method for less than
+def __lt__(self, other):  # Dunder method for less than
     return self.score < other.score
 
 
-def __le__(self, other):        # Dunder method for less than or equal to
+def __le__(self, other):  # Dunder method for less than or equal to
     return self.score <= other.score
 
 
-def __eq__(self, other):        # Dunder method for equal to
+def __eq__(self, other):  # Dunder method for equal to
     return self.score == other.score
 
 
-def __gt__(self, other):        # Dunder method for greater than
+def __gt__(self, other):  # Dunder method for greater than
     return self.score > other.score
 
 
-def __ge__(self, other):        # Dunder method for greater than or equal to
+def __ge__(self, other):  # Dunder method for greater than or equal to
     return self.score >= other.score
