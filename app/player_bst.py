@@ -29,7 +29,6 @@ class PlayerBST:
         else:
             node.player = player
 
-
     def search(self, name):
         return self._search(name, self._root)
 
@@ -40,3 +39,27 @@ class PlayerBST:
             return self._search(name, node.left)
         else:
             return self._search(name, node.right)
+
+    def to_list(self, node=None, lst=None):
+        if node is None:
+            node = self._root
+        if lst is None:
+            lst = []
+        if node.left is not None:
+            self.to_list(node.left, lst)
+        lst.append(node.player)
+        if node.right is not None:
+            self.to_list(node.right, lst)
+        return lst
+
+    def from_list(self, lst):
+        self._root = self._from_list_helper(lst)
+
+    def _from_list_helper(self, lst):
+        if not lst:
+            return None
+        mid = len(lst) // 2
+        root_node = PlayerBNode(lst[mid])
+        root_node.left = self._from_list_helper(lst[:mid])
+        root_node.right = self._from_list_helper(lst[mid + 1:])
+        return root_node
