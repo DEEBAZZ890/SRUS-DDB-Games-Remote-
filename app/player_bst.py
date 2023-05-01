@@ -9,57 +9,57 @@ class PlayerBST:
     def root(self):
         return self._root
 
-    def insert(self, player):
+    def insert(self, player):       # Checks if a root exists or if a new player will be added to the BST. If yes, calls insert logic
         if self._root is None:
             self._root = PlayerBNode(player)
         else:
-            self._insert_setup(player, self._root)
+            self.insert_logic(player, self._root)
 
-    def _insert_setup(self, player, node):
+    def insert_logic(self, player, node):   # Inserts new player in the appropriate location based on their name and the existing nodes.
         if player.name < node.player.name:
             if node.left is None:
                 node.left = PlayerBNode(player)
             else:
-                self._insert_setup(player, node.left)
+                self.insert_logic(player, node.left)
         elif player.name > node.player.name:
             if node.right is None:
                 node.right = PlayerBNode(player)
             else:
-                self._insert_setup(player, node.right)
+                self.insert_logic(player, node.right)
         else:
             node.player = player
 
-    def search(self, name):
-        return self._search(name, self._root)
+    def search(self, name):       # Calls the search logic method to recursively search through the BST
+        return self.search_logic(name, self._root)
 
-    def _search(self, name, node):
+    def search_logic(self, name, node):     # Checks each node for a matching player name starting with the root
         if node is None or node.player.name == name:
             return node
         elif name < node.player.name:
-            return self._search(name, node.left)
+            return self.search_logic(name, node.left)
         else:
-            return self._search(name, node.right)
+            return self.search_logic(name, node.right)
 
-    def to_list(self, node=None, lst=None):
+    def created_sorted_list(self, node=None, lst=None):     # Sorts non balanced BST by adding from lowest to highest
         if node is None:
             node = self._root
         if lst is None:
             lst = []
         if node.left is not None:
-            self.to_list(node.left, lst)
+            self.created_sorted_list(node.left, lst)        # Recursive call
         lst.append(node.player)
         if node.right is not None:
-            self.to_list(node.right, lst)
+            self.created_sorted_list(node.right, lst)       # Recursive call
         return lst
 
-    def from_list(self, lst):
-        self._root = self._from_list_helper(lst)
+    def bst_balance(self, lst):     # calls the balance optimization and assigns the new root which is the middle element
+        self._root = self.bst_balance_logic(lst)
 
-    def _from_list_helper(self, lst):
+    def bst_balance_logic(self, lst):       # Balancing logic. finds the middle element and then creates left and right subtrees from the midpoint
         if not lst:
             return None
-        midd_point = len(lst) // 2
-        root_node = PlayerBNode(lst[midd_point])
-        root_node.left = self._from_list_helper(lst[:midd_point])
-        root_node.right = self._from_list_helper(lst[midd_point + 1:])
-        return root_node
+        mid_element = len(lst) // 2
+        new_root = PlayerBNode(lst[mid_element])
+        new_root.left = self.bst_balance_logic(lst[:mid_element])
+        new_root.right = self.bst_balance_logic(lst[mid_element + 1:])
+        return new_root

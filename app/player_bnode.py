@@ -1,4 +1,4 @@
-class PlayerBNode:
+class PlayerBNode:      # Properties and instance variables regarding the nodes in the BST
     def __init__(self, player):
         self._player = player
         self._left = None
