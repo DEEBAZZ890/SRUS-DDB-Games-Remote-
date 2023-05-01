@@ -35,54 +35,43 @@ class Player:
             player_list[current_player + 1] = key
         return player_list
 
+    @property  # getter for uid
+    def uid(self):
+        return self._uid
 
-@property  # getter for uid
-def uid(self):
-    return self._uid
+    @property  # getter for name
+    def name(self):
+        return self._name
 
+    @name.setter
+    def name(self, value):
+        self._name = value
 
-@property  # getter for name
-def name(self):
-    return self._name
+    @property
+    def score(self):
+        return self._score
 
+    @score.setter
+    def score(self, value):
+        if value < 0:
+            raise ValueError("Score must be positive")
+        else:
+            self._score = value
 
-@name.setter
-def name(self, value):
-    self._name = value
+    def __str__(self):  # used to print readable string of the player object
+        return f"{self._uid} - {self._name}"
 
+    def __lt__(self, other):  # Dunder method for less than
+        return self.score < other.score
 
-@property
-def score(self):
-    return self._score
+    def __le__(self, other):  # Dunder method for less than or equal to
+        return self.score <= other.score
 
+    def __eq__(self, other):  # Dunder method for equal to
+        return self.score == other.score
 
-@score.setter
-def score(self, value):
-    if value < 0:
-        raise ValueError("Score must be positive")
-    else:
-        self._score = value
+    def __gt__(self, other):  # Dunder method for greater than
+        return self.score > other.score
 
-
-def __str__(self):  # used to print readable string of the player object
-    return f"{self._uid} - {self._name}"
-
-
-def __lt__(self, other):  # Dunder method for less than
-    return self.score < other.score
-
-
-def __le__(self, other):  # Dunder method for less than or equal to
-    return self.score <= other.score
-
-
-def __eq__(self, other):  # Dunder method for equal to
-    return self.score == other.score
-
-
-def __gt__(self, other):  # Dunder method for greater than
-    return self.score > other.score
-
-
-def __ge__(self, other):  # Dunder method for greater than or equal to
-    return self.score >= other.score
+    def __ge__(self, other):  # Dunder method for greater than or equal to
+        return self.score >= other.score

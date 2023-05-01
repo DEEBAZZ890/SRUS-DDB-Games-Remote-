@@ -16,12 +16,12 @@ class PlayerBST:
             self._insert_setup(player, self._root)
 
     def _insert_setup(self, player, node):
-        if player._name < node.player._name:
+        if player.name < node.player.name:
             if node.left is None:
                 node.left = PlayerBNode(player)
             else:
                 self._insert_setup(player, node.left)
-        elif player._name > node.player._name:
+        elif player.name > node.player.name:
             if node.right is None:
                 node.right = PlayerBNode(player)
             else:
@@ -33,9 +33,9 @@ class PlayerBST:
         return self._search(name, self._root)
 
     def _search(self, name, node):
-        if node is None or node.player._name == name:
+        if node is None or node.player.name == name:
             return node
-        elif name < node.player._name:
+        elif name < node.player.name:
             return self._search(name, node.left)
         else:
             return self._search(name, node.right)
@@ -58,8 +58,8 @@ class PlayerBST:
     def _from_list_helper(self, lst):
         if not lst:
             return None
-        mid = len(lst) // 2
-        root_node = PlayerBNode(lst[mid])
-        root_node.left = self._from_list_helper(lst[:mid])
-        root_node.right = self._from_list_helper(lst[mid + 1:])
+        midd_point = len(lst) // 2
+        root_node = PlayerBNode(lst[midd_point])
+        root_node.left = self._from_list_helper(lst[:midd_point])
+        root_node.right = self._from_list_helper(lst[midd_point + 1:])
         return root_node

@@ -31,10 +31,10 @@ class PlayerNode:
 
     @property       # provides the functionality for the delete by key method by getting the player uid from player
     def key(self):
-        return self._player._uid
+        return self.player.uid
 
     def __str__(self):      # returns a readable string of the player object
-        return f"{self.player._uid} - {self.player._name}"
+        return f"{self.player.uid} - {self.player.name}"
 
 
 
